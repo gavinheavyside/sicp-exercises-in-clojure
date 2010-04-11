@@ -1,4 +1,5 @@
 (ns sicp.chapter1.test
+  (:use [sicp.chapter1.chapter1] :reload-all)
   (:use [clojure.test]))
 
 (deftest exercise-1-1
@@ -63,3 +64,13 @@
            (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5))))) (* 3 (- 6 2) (- 2 7)))))
       ))
   )
+
+(deftest exercise-1-3
+ (testing "exercise 1.3"
+    (is (=
+         13
+         ( square-and-sum-two-largest-of [ 1 2 3])))
+    (is (=
+         5
+         (square-and-sum-two-largest-of [ -2 -4 1])))
+    ))
