@@ -74,3 +74,21 @@
          5
          (square-and-sum-two-largest-of [ -2 -4 1])))
     ))
+
+
+(deftest exercise-1-4
+  (testing "exercise 1.4"
+    (is (=
+         4
+         (a-plus-abs-b 2 2)))
+    (is (=
+         4
+         (a-plus-abs-b 2 -2)))
+    ))
+
+
+(deftest exercise-1-5
+  (testing "exercise 1.5"
+    (is (=
+         0
+         (test-1-5 0 p-1-5)))))
