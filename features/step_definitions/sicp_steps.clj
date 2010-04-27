@@ -1,5 +1,5 @@
 (ns sicp.features
-  (:use [sicp.core] :reload-all)
+  (:use [sicp.chapter1.chapter1] :reload-all)
   (:use [clojure.test])
   )
 
@@ -16,8 +16,9 @@
       )
 
 (Then #"^I should also match a then line with a number (\d+)$"
-  (fn [expected]
-    (is (= testval (Integer. expected)))
-    (assert (= testval (Integer. expected))))
-  )
+      (fn [expected]
+        (def testval 3)
+        (is (= testval (Integer. expected)))
+        (assert (= testval (Integer. expected))))
+      )
 
