@@ -20,9 +20,6 @@ Running tests
 -------------
 
 `lein test` will run the unit tests.
-
-I haven't got lein-cuke working yet, but cucumber/cuke4duke can run the features
-directly using
-  
-    cuke4duke --jar lib --require src --require features/step_definitions features/
+`lein cuke` will run features using cuke4duke.  cuke4duke must be
+present on the system, I am not using the lein-cuke plugin.
 
