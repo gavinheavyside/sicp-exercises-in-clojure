@@ -30,3 +30,16 @@
   (if (= x 0)
     0
     y))
+
+;; exercise 1.6
+;; in an if expression the alternative is not evaluated unless the
+;; predicate fails. This is not the case for the cond expression, and
+;; the alternative is evaluated (recursively)
+
+
+;; exercise 1.7
+;; v big or v small numbers, being within 0.001 is not useful to get
+;; an accurate square root.  One option is to consider accuracy as a
+;; fraction of the square rather than an absolute
+(defn good-enough? [guess x]
+  (< (abs (/ (- (square guess) x) x)) 0.0001))
