@@ -1,4 +1,5 @@
-(ns sicp.chapter1.chapter1)
+(ns sicp.chapter1.chapter1
+  (:use [ clojure.contrib.math :only ( abs)]))
 
 
 ;; exercise 1.3
@@ -41,5 +42,8 @@
 ;; v big or v small numbers, being within 0.001 is not useful to get
 ;; an accurate square root.  One option is to consider accuracy as a
 ;; fraction of the square rather than an absolute
+(defn square [x]
+  (* x x ))
+
 (defn good-enough? [guess x]
   (< (abs (/ (- (square guess) x) x)) 0.0001))
