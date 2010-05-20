@@ -20,7 +20,7 @@
 (defn a-plus-abs-b
   [a b]
   ((if (> b 0) + -) a b))
-  
+
 ;; exercise 1.5
 ;; applicative order: returns 0 because if is evaluated first, and x is 0
 ;; normal order: infinite recursion as p evaluates to p, which is
@@ -42,8 +42,28 @@
 ;; v big or v small numbers, being within 0.001 is not useful to get
 ;; an accurate square root.  One option is to consider accuracy as a
 ;; fraction of the square rather than an absolute
-(defn square [x]
-  (* x x ))
+(defn sqrt-iter [guess x]
+  (let [square #(* % %)
+        good-enough #(< (abs (/ (- (square %1) %2) %2)) 0.00001)
+        average #(/ (+ %1 %2) 2)
+        improve #(average %1 (/ %2 %1))]
+    (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x)
+                 x))))
 
-(defn good-enough? [guess x]
-  (< (abs (/ (- (square guess) x) x)) 0.0001))
+(defn sqrt [x]
+  (sqrt-iter 1.0 x))
+
+
+;; a non-recursive implementation that uses a lazy sequence to
+;; calculate the next improved estimate
+(defn lazy-sqrt-iter [guess x]
+  (let [square #(* % %)
+        good-enough #(< (abs (/ (- (square %) x) x)) 0.00001)
+        average #(/ (+ %1 %2) 2)
+        improve #(average % (/ x %))]
+    (first (drop-while #(not (good-enough %)) (iterate improve guess)))))
+
+(defn lazy-sqrt [x]
+  (lazy-sqrt-iter 1.0 x))
