@@ -1,5 +1,6 @@
 (ns sicp.chapter1.test
   (:use [sicp.chapter1.chapter1] :reload-all)
+  (:use [clojure.contrib.math :only (abs)])
   (:use [clojure.test]))
 
 (deftest exercise-1-1
@@ -92,3 +93,10 @@
     (is (=
          0
          (test-1-5 0 p-1-5)))))
+
+(deftest exercise-1-8
+  (let [square #(* % %)]
+    (testing "exercise 1.8"
+      (is (< (abs (- 5 (square (sqrt 5)))) 0.00001 )))
+    (testing "exercise 1.8 (lazy)"
+      (is (< (abs (/ (- 1000000 (square (lazy-sqrt 1000000))) 1000000)) 0.00001)))))

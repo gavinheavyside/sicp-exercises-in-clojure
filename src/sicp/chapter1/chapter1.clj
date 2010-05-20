@@ -44,7 +44,7 @@
 ;; fraction of the square rather than an absolute
 (defn sqrt-iter [guess x]
   (let [square #(* % %)
-        good-enough #(< (abs (/ (- (square %1) %2) %2)) 0.00001)
+        good-enough? #(< (abs (/ (- (square %1) %2) %2)) 0.00001)
         average #(/ (+ %1 %2) 2)
         improve #(average %1 (/ %2 %1))]
     (if (good-enough? guess x)
@@ -58,12 +58,9 @@
 
 ;; a non-recursive implementation that uses a lazy sequence to
 ;; calculate the next improved estimate
-(defn lazy-sqrt-iter [guess x]
+(defn lazy-sqrt [x]
   (let [square #(* % %)
-        good-enough #(< (abs (/ (- (square %) x) x)) 0.00001)
+        good-enough? #(< (abs (/ (- (square %) x) x)) 0.00001)
         average #(/ (+ %1 %2) 2)
         improve #(average % (/ x %))]
-    (first (drop-while #(not (good-enough %)) (iterate improve guess)))))
-
-(defn lazy-sqrt [x]
-  (lazy-sqrt-iter 1.0 x))
+    (first (drop-while #(not (good-enough? %)) (iterate improve 1.0)))))
